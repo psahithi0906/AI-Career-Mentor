@@ -9,18 +9,16 @@
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the repository
-git clone https://github.com/psahithi0906/AI-Career-Mentor.git
+``` git clone https://github.com/psahithi0906/AI-Career-Mentor.git  ```
 
 ### 2. Navigate to frontend
-cd AI-Career-Mentor/frontend
+``` cd AI-Career-Mentor/frontend ```
 
 ### 3. Install dependencies
-npm install
+``` npm install ```
 
 ### 4. Start the development server
 npm run dev
 
 ---
 
-## 🌐 Access the app
-http://localhost:5173
