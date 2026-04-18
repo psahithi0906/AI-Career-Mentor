@@ -2,6 +2,7 @@ import "./Home.css";
 
 function Home() {
   return (
+    <div>
     <div className="home">
       {/* Navbar */}
       <nav className="navbar">
@@ -25,7 +26,6 @@ function Home() {
 
         <div className="buttons">
           <button className="primary-btn">Get Started</button>
-          <button className="secondary-btn">Watch Demo</button>
         </div>
 
         {/* Image
@@ -35,11 +35,18 @@ function Home() {
       </div>
 
       {/* Features */}
+      {/* <div className="features">
+        <button className="options">🎯 Personalized Career Paths</button>
+        <button className="options">📄 AI Resume Analysis</button>
+        <button className="options">💡 Skill Recommendations</button>
+      </div> */}
+    </div>
       <div className="features">
         <button className="options">🎯 Personalized Career Paths</button>
         <button className="options">📄 AI Resume Analysis</button>
         <button className="options">💡 Skill Recommendations</button>
       </div>
+    <div/>
     </div>
   );
 }
