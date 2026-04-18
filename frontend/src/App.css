@@ -19,6 +19,7 @@
 
 .hero {
   position: relative;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
   .base,
   .framework,
@@ -111,10 +112,14 @@
   gap: 8px;
   margin: 32px 0 0;
 
-  .logo {
-    height: 18px;
-  }
-
+  /* .logo {
+    height: 20px;
+  } */
+.logo img {
+  height: 40px;   /* adjust as needed */
+  width: auto;
+  object-fit: contain;
+}
   a {
     color: var(--text-h);
     font-size: 16px;

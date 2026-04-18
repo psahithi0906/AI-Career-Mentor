@@ -1,17 +1,15 @@
 import "./Home.css";
-
+import logo from "../public/logo.png";
 function Home() {
   return (
     <div>
     <div className="home">
       {/* Navbar */}
       <nav className="navbar">
-        <div className="logo">AI Career</div>
+        <div className="logo"><img src={logo} alt="AI Career" /></div>
         <ul className="nav-links">
-          <li>Features</li>
-          <li>Pricing</li>
-          <li>Contact</li>
-          <button className="login-btn">Sign In</button>
+          
+          <a href="#" class="hbtn hb-fill-left-rev-bg-br hpill">Sign In</a>
         </ul>
       </nav>
 
