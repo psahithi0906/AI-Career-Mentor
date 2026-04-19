@@ -49,6 +49,8 @@
   top: 100%;
   right: 0;
   width: 280px;
+  max-height: 400px;
+  overflow-y: auto;
   margin-top: 10px;
   padding: 14px;
   border-radius: 16px;
@@ -70,8 +72,16 @@
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 13px;
   color: #334155;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.profile-detail span:last-child {
+  text-align: right;
+  max-width: 60%;
+  word-break: break-word;
 }
 
 .profile-detail:last-child {

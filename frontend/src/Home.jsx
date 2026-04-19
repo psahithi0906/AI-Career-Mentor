@@ -139,9 +139,9 @@ function Home() {
                   required
                 >
                   <option value="">Select a service</option>
-                  <option value="career-paths">Personalized Career Paths</option>
-                  <option value="resume-analysis">AI Resume Analysis</option>
-                  <option value="skill-recommendations">Skill Recommendations</option>
+                  <option value="career-paths">🎯 Smart Job Discovery</option>
+                  <option value="resume-analysis">📄 AI Resume Analysis</option>
+                  <option value="skill-recommendations">💡 Desired Skills & Paths</option>
                 </select>
               </div>
               <button type="submit" className="submit-btn">Submit & Continue</button>
