@@ -3,7 +3,7 @@
 ## 📌 Prerequisites
 - Node.js (v18 or above)
 - npm
-
+- postgress
 ---
 
 ## ⚙️ Setup Instructions
