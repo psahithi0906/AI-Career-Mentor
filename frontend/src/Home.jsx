@@ -1,50 +1,189 @@
+import { useEffect, useState } from "react";
 import "./Home.css";
 import logo from "../public/logo.png";
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+  const navigate = useNavigate();
+  const [showProfile, setShowProfile] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const name = user.name || "User";
+  const email = user.email || "Not available";
+
+  const [formData, setFormData] = useState({
+    skills: "",
+    experience: "",
+    company: "",
+    role: "",
+    service: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Store in localStorage or state
+    localStorage.setItem("careerForm", JSON.stringify(formData));
+    // Navigate based on service
+    const routes = {
+      "career-paths": "/career-paths",
+      "resume-analysis": "/resume-analysis",
+      "skill-recommendations": "/skill-recommendations",
+    };
+    navigate(routes[formData.service] || "/form");
+  };
+
+  useEffect(() => {
+    if (!showProfile) return;
+    const timer = setTimeout(() => setShowProfile(false), 3000);
+    return () => clearTimeout(timer);
+  }, [showProfile]);
+
   return (
     <div>
-    <div className="home">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="logo"><img src={logo} alt="AI Career" /></div>
-        <ul className="nav-links">
-          
-          <a href="#" class="hbtn hb-fill-left-rev-bg-br hpill">Sign In</a>
-        </ul>
-      </nav>
+      <div className="home">
+        {/* Navbar */}
+        <nav className="navbar">
+          <div className="logo">
+            <img src={logo} alt="AI Career" />
+          </div>
 
-      {/* Hero Section */}
-      <div className="hero">
-        <h1>
-          Empower Your Career with <span>AI</span>
-        </h1>
-        <p>
-          Get personalized career paths and resume analysis powered by AI.
-        </p>
+          <div className="user-info">
+            <button
+              type="button"
+              className="profile-button"
+              onClick={() => setShowProfile((prev) => !prev)}
+            >
+              <img
+                src="/profile.jpg"
+                alt="Profile"
+                className="profile-img"
+              />
+            </button>
+            <div className="user-greeting">
+              <b>Hi {name}!</b>
+            </div>
 
-        <div className="buttons">
-          <button className="primary-btn">Get Started</button>
+            {showProfile && (
+              <div className="profile-popup">
+                <div className="profile-popup-header">Profile</div>
+                <div className="profile-detail">
+                  <span className="detail-label">Name</span>
+                  <span>{name}</span>
+                </div>
+                <div className="profile-detail">
+                  <span className="detail-label">Email</span>
+                  <span>{email}</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </nav> 
+
+        {/* Hero Section */}
+        <div className="hero">
+          <h1>
+            Empower Your Career with <span>AI</span>
+          </h1>
+
+          <p>
+            Get personalized career paths and resume analysis powered by AI.
+          </p>
+
+          <div className="career-form-box">
+            <form onSubmit={handleSubmit} className="career-form">
+              <h2>Let's Get Started! Please enter the below details</h2>
+              <div className="form-group">
+                <label htmlFor="skills">Skills (comma-separated)</label>
+                <textarea
+                  id="skills"
+                  name="skills"
+                  value={formData.skills}
+                  onChange={handleInputChange}
+                  placeholder="e.g., JavaScript, React, Python"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="experience">Years of Experience</label>
+                <select
+                  id="experience"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">Select experience</option>
+                  <option value="0-1">0-1 years</option>
+                  <option value="1-3">1-3 years</option>
+                  <option value="3-5">3-5 years</option>
+                  <option value="5-10">5-10 years</option>
+                  <option value="10+">10+ years</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="company">Current Company</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleInputChange}
+                  placeholder="e.g., Google"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="role">Current Role</label>
+                <input
+                  type="text"
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  placeholder="e.g., Software Engineer"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="service">What service would you like?</label>
+                <select
+                  id="service"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">Select a service</option>
+                  <option value="career-paths">Personalized Career Paths</option>
+                  <option value="resume-analysis">AI Resume Analysis</option>
+                  <option value="skill-recommendations">Skill Recommendations</option>
+                </select>
+              </div>
+              <button type="submit" className="submit-btn">Submit & Continue</button>
+            </form>
+          </div>
         </div>
-
-        {/* Image
-        <div className="hero-image">
-          <img src="/hero.png" alt="career" />
-        </div> */}
       </div>
 
-      {/* Features */}
-      {/* <div className="features">
-        <button className="options">🎯 Personalized Career Paths</button>
-        <button className="options">📄 AI Resume Analysis</button>
-        <button className="options">💡 Skill Recommendations</button>
-      </div> */}
-    </div>
+      {/* Features Section */}
       <div className="features">
-        <button className="options">🎯 Personalized Career Paths</button>
-        <button className="options">📄 AI Resume Analysis</button>
-        <button className="options">💡 Skill Recommendations</button>
+        <div className="option-container">
+          <button className="options">🎯 Personalized Career Paths</button>
+          <div className="tooltip">🌟 Discover your ideal career direction with personalized roadmap, required skills, and learning timeline powered by AI</div>
+        </div>
+        <div className="option-container">
+          <button className="options">📄 AI Resume Analysis</button>
+          <div className="tooltip">📄 Upload your resume to get AI-driven analysis with ATS score, skill gaps, and improvement suggestions.</div>
+        </div>
+        <div className="option-container">
+          <button className="options">💡 Skill Recommendations</button>
+          <div className="tooltip">💡 Discover the exact skills you need to reach your desired role, prioritized by importance and learning order.</div>
+        </div>
       </div>
-    <div/>
     </div>
   );
 }
