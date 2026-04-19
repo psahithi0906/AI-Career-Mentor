@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Home.css";
-import logo from "../public/logo.png";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import API from "./services/api";
 
 function Home() {
   const navigate = useNavigate();
@@ -23,65 +24,45 @@ function Home() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Store in localStorage or state
-    localStorage.setItem("careerForm", JSON.stringify(formData));
-    // Navigate based on service
-    const routes = {
-      "career-paths": "/career-paths",
-      "resume-analysis": "/resume-analysis",
-      "skill-recommendations": "/skill-recommendations",
-    };
-    navigate(routes[formData.service] || "/form");
+    try {
+      // Update user record with career details
+      const user = JSON.parse(localStorage.getItem("user")) || {};
+      const updatedUser = { ...user, ...formData };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      
+      // Send to backend
+      await API.put("/auth/update", {
+        skills: formData.skills,
+        experience: formData.experience,
+        company: formData.company,
+        role: formData.role,
+      });
+      
+      // Navigate based on service
+      const routes = {
+        "career-paths": "/career-paths",
+        "resume-analysis": "/resume-analysis",
+        "skill-recommendations": "/skill-recommendations",
+      };
+      navigate(routes[formData.service] || "/form");
+    } catch (err) {
+      console.error("Update failed:", err);
+      // Still navigate even if update fails
+      const routes = {
+        "career-paths": "/career-paths",
+        "resume-analysis": "/resume-analysis",
+        "skill-recommendations": "/skill-recommendations",
+      };
+      navigate(routes[formData.service] || "/form");
+    }
   };
-
-  useEffect(() => {
-    if (!showProfile) return;
-    const timer = setTimeout(() => setShowProfile(false), 3000);
-    return () => clearTimeout(timer);
-  }, [showProfile]);
 
   return (
     <div>
-      <div className="home">
-        {/* Navbar */}
-        <nav className="navbar">
-          <div className="logo">
-            <img src={logo} alt="AI Career" />
-          </div>
-
-          <div className="user-info">
-            <button
-              type="button"
-              className="profile-button"
-              onClick={() => setShowProfile((prev) => !prev)}
-            >
-              <img
-                src="/profile.jpg"
-                alt="Profile"
-                className="profile-img"
-              />
-            </button>
-            <div className="user-greeting">
-              <b>Hi {name}!</b>
-            </div>
-
-            {showProfile && (
-              <div className="profile-popup">
-                <div className="profile-popup-header">Profile</div>
-                <div className="profile-detail">
-                  <span className="detail-label">Name</span>
-                  <span>{name}</span>
-                </div>
-                <div className="profile-detail">
-                  <span className="detail-label">Email</span>
-                  <span>{email}</span>
-                </div>
-              </div>
-            )}
-          </div>
-        </nav> 
+      <Navbar />
+      <div className="home"> 
 
         {/* Hero Section */}
         <div className="hero">
@@ -172,16 +153,16 @@ function Home() {
       {/* Features Section */}
       <div className="features">
         <div className="option-container">
-          <button className="options">🎯 Personalized Career Paths</button>
-          <div className="tooltip">🌟 Discover your ideal career direction with personalized roadmap, required skills, and learning timeline powered by AI</div>
+          <button className="options">🎯 Smart Job Discovery</button>
+          <div className="tooltip">🌟 Search jobs based on your profile with insights on roles, companies, and hiring trends</div>
         </div>
         <div className="option-container">
           <button className="options">📄 AI Resume Analysis</button>
           <div className="tooltip">📄 Upload your resume to get AI-driven analysis with ATS score, skill gaps, and improvement suggestions.</div>
         </div>
         <div className="option-container">
-          <button className="options">💡 Skill Recommendations</button>
-          <div className="tooltip">💡 Discover the exact skills you need to reach your desired role, prioritized by importance and learning order.</div>
+          <button className="options">💡 Desired Skills & Paths</button>
+          <div className="tooltip">💡AI-powered skill recommendations and step-by-step career roadmaps tailored to your desired role with prioritized learning paths and structured milestones. </div>
         </div>
       </div>
     </div>

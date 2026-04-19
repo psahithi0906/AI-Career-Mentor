@@ -47,11 +47,34 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
-    res.json({ token, user: { id: user.id, name: user.name, email: user.email } });
+    res.json({ token, user: { id: user.id, name: user.name, email: user.email, skills: user.skills, experience: user.experience, company: user.company, role: user.role } });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 });
+// UPDATE USER DETAILS
+router.put("/update", async (req, res) => {
+  try {
+    const { skills, experience, company, role } = req.body;
+    const token = req.headers.authorization?.split(" ")[1];
 
+    if (!token) {
+      return res.status(401).json({ error: "No token provided" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+
+    await pool.query(
+      "UPDATE users SET skills = $1, experience = $2, company = $3, role = $4 WHERE id = $5",
+      [skills, experience, company, role, userId]
+    );
+
+    res.json({ message: "User details updated successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: "Update failed" });
+  }
+});
 module.exports = router;

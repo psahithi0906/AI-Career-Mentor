@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "./services/api";
 import "./Signin-login.css";
+import logo from "../public/logo.png";
+import "./Home.css";
 
 export default function Login() {
   const [isNewUser, setIsNewUser] = useState(false);
@@ -47,8 +49,21 @@ export default function Login() {
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
+      <div className="auth-logo-top">
+        <img src={logo} alt="AI Career" className="auth-logo" />
+      </div>
+      <div className="auth-hero">
+          <h1>
+            Empower Your Career with <span>AI</span>
+          </h1>
 
+          <p>
+            Get personalized career paths and resume analysis powered by AI.
+          </p>
+        </div>
+      <div className="auth-card">
+         
+     
         <h1 className="auth-title">
           {isNewUser ? "Create Account" : "Welcome!"}
         </h1>
