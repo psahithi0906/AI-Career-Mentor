@@ -19,6 +19,10 @@
 
 ### 4. Start the development server
 ``` npm run dev ```
+### 5.Frontend endpoint :
+```5173```
+### 5.backend endpoint :
+```5001```
 
 ---
 
