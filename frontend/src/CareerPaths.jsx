@@ -79,7 +79,7 @@ function CareerPaths() {
         </div>
 
         <div className="search-section">
-          <h2>Search Jobs of your current role</h2>
+          <h2>Search Job openings of your current role</h2>
           <div className="search-input-group">
             <input
               type="text"
