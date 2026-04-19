@@ -65,20 +65,57 @@
 }
 
 .search-section {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.search-section h2 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
   text-align: center;
-  margin: 3rem 0;
+}
+
+.search-input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.company-input,
+.location-input {
+  padding: 1rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.company-input:focus,
+.location-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .search-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  padding: 1rem 3rem;
-  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  white-space: nowrap;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  white-space: nowrap;
 }
 
 .search-btn:hover:not(:disabled) {
@@ -102,6 +139,160 @@
   color: #2c3e50;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
+}
+
+.results-count {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.job-card {
+  background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.job-title-section {
+  flex: 1;
+}
+
+.job-title-section h3 {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.job-id {
+  display: inline-block;
+  background: #e0e7ff;
+  color: #4f46e5;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.match-score {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.job-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.job-description {
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.job-requirements {
+  margin-bottom: 1rem;
+}
+
+.job-requirements strong {
+  display: block;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid #e2e8f0;
+}
+
+.apply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  text-decoration: none;
+  border: none;
+  padding: 0.9rem 2.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: white;
+}
+
+.apply-btn:active {
+  transform: translateY(0);
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.no-results-image {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
 }
 
 .placeholder-content {
@@ -150,10 +341,19 @@
     grid-template-columns: 1fr;
   }
 
+  .search-input-group {
+    flex-direction: column;
+  }
+
   .search-btn {
+    width: 100%;
     padding: 0.8rem 2rem;
     font-size: 1rem;
   }
+
+  .company-input {
+    width: 100%;
+  }
 }
 
-/* Made with Bob */
+

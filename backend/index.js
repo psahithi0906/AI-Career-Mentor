@@ -20,7 +20,10 @@ app.use(express.json());
 
 // Routes
 const authRoutes = require("./routes/auth");
+const jobsRoutes = require("./routes/jobs");
+
 app.use("/api/auth", authRoutes);
+app.use("/api/jobs", jobsRoutes);
 
 app.listen(process.env.PORT || 5001, () => {
   console.log(`Server running on port ${process.env.PORT || 5001}`);

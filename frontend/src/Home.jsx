@@ -154,7 +154,7 @@ function Home() {
       <div className="features">
         <div className="option-container">
           <button className="options">🎯 Smart Job Discovery</button>
-          <div className="tooltip">🌟 Search jobs based on your profile with insights on roles, companies, and hiring trends</div>
+          <div className="tooltip">🌟 Search jobs based on your current job profile with insights on roles, companies, and hiring trends</div>
         </div>
         <div className="option-container">
           <button className="options">📄 AI Resume Analysis</button>
