@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: "http://localhost:5174",
+  origin: ["http://localhost:5173", "http://localhost:5174"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -21,9 +21,11 @@ app.use(express.json());
 // Routes
 const authRoutes = require("./routes/auth");
 const jobsRoutes = require("./routes/jobs");
+const insightsRoutes = require("./routes/insights");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobsRoutes);
+app.use("/api/insights", insightsRoutes);
 
 app.listen(process.env.PORT || 5001, () => {
   console.log(`Server running on port ${process.env.PORT || 5001}`);
