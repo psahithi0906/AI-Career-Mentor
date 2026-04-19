@@ -12,10 +12,10 @@ function Home() {
   const email = user.email || "Not available";
 
   const [formData, setFormData] = useState({
-    skills: "",
-    experience: "",
-    company: "",
-    role: "",
+    skills: user.skills || "",
+    experience: user.experience || "",
+    company: user.company || "",
+    role: user.role || "",
     service: "",
   });
 
